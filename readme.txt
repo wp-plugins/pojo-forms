@@ -27,6 +27,7 @@ Pojo Forms is the ultimate form creation solution for WordPress sites that work 
 * Button
 
 Here are just a few of the things you will find in Pojo Forms:
+
 * Set required fields
 * Set placeholder
 * 3 sizes for Field or Button
