@@ -20,6 +20,7 @@ Pojo Forms is the ultimate form creation solution for WordPress sites that work 
 * Textarea
 * Email
 * URL
+* Tel
 * Checkbox
 * Radio
 * Drop-down (Select)
