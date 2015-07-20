@@ -58,7 +58,7 @@ class Pojo_Forms_Ajax {
 			}
 			
 			$email_html = '';
-			$inline_shortcodes = array();
+			$inline_shortcodes = $field_values = array();
 			
 			foreach ( $repeater_fields as $field_index => $field ) {
 				$field_name = 'form_field_' . ( $field_index + 1 );
@@ -73,6 +73,11 @@ class Pojo_Forms_Ajax {
 				}
 
 				$inline_shortcodes[ $field['shortcode'] ] = $field_value;
+				
+				$field_values[] = array(
+					'title' => $field['name'],
+					'value' => $field_value,
+				);
 				
 				$email_html .= sprintf(
 					'%s: %s' . PHP_EOL,
@@ -97,11 +102,27 @@ class Pojo_Forms_Ajax {
 							break;
 
 						case 'page_url' :
-							$email_html .= sprintf( $tmpl_line_html, __( 'Page URL', 'pojo-forms' ), home_url( $_POST['_wp_http_referer'] ) );
+							$title = __( 'Page URL', 'pojo-forms' );
+							$value = home_url( $_POST['_wp_http_referer'] );
+							
+							$field_values[] = array(
+								'title' => $title,
+								'value' => $value,
+							);
+							
+							$email_html .= sprintf( $tmpl_line_html, $title, $value );
 							break;
 
 						case 'user_agent' :
-							$email_html .= sprintf( $tmpl_line_html, __( 'User Agent', 'pojo-forms' ), $_SERVER['HTTP_USER_AGENT'] );
+							$title = __( 'User Agent', 'pojo-forms' );
+							$value = $_SERVER['HTTP_USER_AGENT'];
+
+							$field_values[] = array(
+								'title' => $title,
+								'value' => $value,
+							);
+
+							$email_html .= sprintf( $tmpl_line_html, $title, $value );
 							break;
 
 						case 'remote_ip' :
@@ -128,18 +149,25 @@ class Pojo_Forms_Ajax {
 				$email_reply_to = atmb_get_field( 'form_email_reply_to', $form->ID );
 				if ( empty( $email_reply_to ) )
 					$email_reply_to = $email_from;
+				
+				$email_reply_to_name = atmb_get_field( 'form_email_reply_to_name', $form->ID );
+				if ( empty( $email_reply_to_name ) )
+					$email_reply_to_name = $email_from_name;
 
-				$email_subject   = strtr( $email_subject, $inline_shortcodes );
-				$email_from_name = strtr( $email_from_name, $inline_shortcodes );
-				$email_from      = strtr( $email_from, $inline_shortcodes );
-				$email_reply_to  = strtr( $email_reply_to, $inline_shortcodes );
+				$email_subject       = strtr( $email_subject, $inline_shortcodes );
+				$email_from_name     = strtr( $email_from_name, $inline_shortcodes );
+				$email_from          = strtr( $email_from, $inline_shortcodes );
+				$email_reply_to      = strtr( $email_reply_to, $inline_shortcodes );
+				$email_reply_to_name = strtr( $email_reply_to_name, $inline_shortcodes );
 				
 				$headers = sprintf( 'From: %s <%s>' . "\r\n", $email_from_name, $email_from );
-				$headers .= sprintf( 'Reply-To: %s <%s>' . "\r\n", $email_from_name, $email_reply_to );
+				$headers .= sprintf( 'Reply-To: %s <%s>' . "\r\n", $email_reply_to_name, $email_reply_to );
+
+				$headers = apply_filters( 'pojo_forms_wp_mail_headers', $headers ); // Temp filter
 				
 				wp_mail( $email_to, $email_subject, $email_html, $headers );
 				
-				do_action( 'pojo_forms_mail_sent', $form->ID );
+				do_action( 'pojo_forms_mail_sent', $form->ID, $field_values );
 			} else {
 				do_action( 'pojo_forms_mail_blocked', $form->ID );
 			}
