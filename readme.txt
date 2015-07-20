@@ -3,7 +3,7 @@ Contributors: pojo.me, KingYes, ariel.k
 Tags: contact, contact form, contact form builder ,contact form plugin, custom form, feedback, form, forms, form builder, forms plugin,
 Requires at least: 4.1
 Tested up to: 4.2
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 License: GPLv2 or later
 
 Pojo Forms allows you to create any form you want with a simple drag and drop interface.
@@ -69,7 +69,20 @@ Would you like to like to contribute to Pojo Forms? You are more than welcome to
 1. Drag and drop the widget and set it
 1. Enjoy!
 
+== Screenshots ==
+
+1. Forms admin page
+2. Form builder
+3. Form style options
+
 == Changelog ==
+
+= 1.1.0 =
+* New! - Added [CF7DB](https://wordpress.org/plugins/contact-form-7-to-database-extension/) support
+* New! - Added reply-to name 
+* Tweak! - Drop-down new option: Set the First Option as unselected 
+* Tweak! - Improved upgrade old pojo themes
+* Fixed! - min/max numbers
 
 = 1.0.1 =
 * Fixed! - problem with multiple email addresses

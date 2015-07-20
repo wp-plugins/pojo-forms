@@ -167,8 +167,8 @@ class Pojo_Forms_CPT {
 		);
 		
 		$repeater_fields[] = array(
-			'id' => 'first_blank_item',
-			'title' => __( 'Set the First Option as Blank', 'pojo-forms' ) . ':',
+			'id' => 'first_unselectable_item',
+			'title' => __( 'Set the first option as unselectable', 'pojo-forms' ) . ':',
 			'type' => Pojo_MetaBox::FIELD_CHECKBOX,
 			'std' => false,
 		);
@@ -188,6 +188,7 @@ class Pojo_Forms_CPT {
 			'title' => __( 'Min', 'pojo-forms' ),
 			'type' => Pojo_MetaBox::FIELD_NUMBER,
 			'placeholder' => '5',
+			'min' => '-99999',
 			'std' => '',
 		);
 
@@ -309,9 +310,16 @@ class Pojo_Forms_CPT {
 		$fields[] = array(
 			'id' => 'email_form',
 			'title' => __( 'From Email', 'pojo-forms' ),
-			'std' => get_option( 'admin_email' ),
+			'std' => 'noreply@' . parse_url( home_url(), PHP_URL_HOST ),
 		);
 
+		$fields[] = array(
+			'id' => 'email_reply_to_name',
+			'title' => __( 'Name Reply-To (Optional)', 'pojo-forms' ),
+			'placeholder' => __( 'Insert Shortcode ID', 'pojo-forms' ),
+			'std' => '',
+		);
+		
 		$fields[] = array(
 			'id' => 'email_reply_to',
 			'title' => __( 'Email Reply-To (Optional)', 'pojo-forms' ),

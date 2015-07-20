@@ -4,7 +4,7 @@ Plugin Name: Pojo Forms
 Description: Pojo Forms allows you to create any form you want with a simple drag and drop interface.
 Plugin URI: http://pojo.me/
 Author: Pojo Team
-Version: 1.0.1
+Version: 1.1.0
 Author URI: http://pojo.me/
 Text Domain: pojo-forms
 Domain Path: /languages/
@@ -142,14 +142,19 @@ final class Pojo_Forms {
 			include( 'classes/class-pojo-forms-aal.php' );
 			$aal = new Pojo_Forms_Aal();
 		}
+		
+		if ( function_exists( 'CF7DBPlugin_i18n_init' ) ) {
+			include( 'classes/class-pojo-forms-cf7db.php' );
+			$cf7db = new Pojo_Forms_CF7DB();
+		}
 	}
 
 	public function admin_notices() {
-		echo '<div class="error"><p>' . sprintf( __( '<a href="%s" target="_blank">Pojo Framework</a> is not active. Please activate any theme by Pojo before you are using "Pojo Forms" plugin.', 'pojo-forms' ), 'http://pojo.me/' ) . '</p></div>';
+		echo '<div class="error"><p>' . sprintf( __( '<a href="%s" target="_blank">Pojo Theme</a> is not active. Please activate any theme by Pojo.me before you are using "Pojo Forms" plugin.', 'pojo-forms' ), 'http://pojo.me/' ) . '</p></div>';
 	}
 
 	public function print_update_error() {
-		echo '<div class="error"><p>' . sprintf( __( 'Your <a href="%s" target="_blank">Pojo Framework</a> isn\'t updated, please upgrade.', 'pojo-forms' ), 'http://pojo.me/' ) . '</p></div>';
+		echo '<div class="error"><p>' . sprintf( __( 'The Pojo Forms is not supported by this version of %s. Please <a href="%s">upgrade the theme to its latest version</a>.', 'pojo-forms' ), Pojo_Core::instance()->licenses->updater->theme_name, admin_url( 'update-core.php' ) ) . '</p></div>';
 	}
 
 	protected function __construct() {
