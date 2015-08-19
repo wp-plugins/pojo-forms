@@ -4,7 +4,7 @@ Plugin Name: Pojo Forms
 Description: Pojo Forms allows you to create any form you want with a simple drag and drop interface.
 Plugin URI: http://pojo.me/
 Author: Pojo Team
-Version: 1.1.2
+Version: 1.2.0
 Author URI: http://pojo.me/
 Text Domain: pojo-forms
 Domain Path: /languages/
@@ -117,6 +117,7 @@ final class Pojo_Forms {
 		}
 
 		include( 'classes/class-pojo-forms-helpers.php' );
+		include( 'classes/class-pojo-forms-messages.php' );
 		include( 'classes/class-pojo-forms-cpt.php' );
 		include( 'classes/class-pojo-forms-shortcode.php' );
 		include( 'classes/class-pojo-forms-ajax.php' );
