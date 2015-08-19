@@ -2,8 +2,8 @@
 Contributors: pojo.me, KingYes, ariel.k
 Tags: contact, contact form, contact form builder ,contact form plugin, custom form, feedback, form, forms, form builder, forms plugin,
 Requires at least: 4.1
-Tested up to: 4.2
-Stable tag: 1.1.2
+Tested up to: 4.3
+Stable tag: 1.2.0
 License: GPLv2 or later
 
 Pojo Forms allows you to create any form you want with a simple drag and drop interface.
@@ -76,6 +76,11 @@ Would you like to like to contribute to Pojo Forms? You are more than welcome to
 3. Form style options
 
 == Changelog ==
+
+= 1.2.0 - 19/08/2015 =
+* New! - Added custom messages
+* New! - Added form-id class for element form
+* Tweak! - Added limit from name default
 
 = 1.1.2 =
 * Fixed! - Removed reply-to name field was added in v1.1.0 (conflict with Hebrew language)
